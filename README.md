@@ -29,6 +29,9 @@ services:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_USER: wordpress
        WORDPRESS_DB_PASSWORD: wordpress
+     volumes:
+       - ./:/var/www/html # setting root
+
 volumes:
     db_data:
 ```
