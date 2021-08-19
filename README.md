@@ -1,5 +1,4 @@
-# README
-WordPrss on Docker
+# WordPress on Docker
 
 ## 1. Install WordPress
 [Reference](https://docs.docker.jp/compose/wordpress.html)
