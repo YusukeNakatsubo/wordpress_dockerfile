@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.scss"],"names":[],"mappings":"AAEA,EACE,yBAA0B,CAC1B,qBAAsB","file":"../style.css","sourcesContent":["@import '_reset.scss';\n\np {\n  font-size: 20px !important;\n  color: #f00 !important;\n}\n"]}
