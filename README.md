@@ -89,8 +89,10 @@ wp-content/*
 # specify (see the commented-out example for a hint on how to do this.)
 # wp-content/themes/*
 # !wp-content/themes/my-theme/
+```
 
-## Gulp.js
+
+## 2. Set Gulp.js files
 
 ```javascript
 'use strict';
@@ -281,4 +283,4 @@ const lintTask = () =>
   lintEs()
 
 exports.lint = lintTask
-``````
+```
