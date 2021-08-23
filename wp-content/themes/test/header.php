@@ -7,7 +7,7 @@
  * @return $REQUEST_PATH_MATCHES   | array
  * @return $REQUEST_PATH_MATCHESIn | array
  */
-$ROOT_URI               = 'http://localhost:8000/wp-content/themes';
+$ROOT_URI               = 'http://localhost:8000/wp-content/themes/test/';
 $REQUEST_PATH           = $ROOT_URI.$_SERVER["REQUEST_URI"];
 $REQUEST_PATH_MATCHES   = Array();
 $REQUEST_PATH_MATCHES_IN = Array();
