@@ -284,3 +284,12 @@ const lintTask = () =>
 
 exports.lint = lintTask
 ```
+
+### Create MySQL Dump
+
+```
+# Check Container Name
+$ docker container ls
+
+$ docker exec -it CONTAINER_NAME mysqldump -u USER_NAME -pPASSWORD DATABASE_NAME > FILE_NAME.sql
+```
