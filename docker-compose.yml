@@ -5,6 +5,7 @@ services:
     image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
+      - ./db-data/mysql.dump.sql:/docker-entrypoint-initdb.d/install_wordpress.sql
     restart: always
     env_file: .env
 

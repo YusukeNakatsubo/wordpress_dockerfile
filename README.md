@@ -291,5 +291,5 @@ exports.lint = lintTask
 # Check Container Name
 $ docker container ls
 
-$ docker exec -it CONTAINER_NAME mysqldump -u USER_NAME -pPASSWORD DATABASE_NAME > FILE_NAME.sql
+$ docker exec -it CONTAINER_NAME mysqldump -u USER_NAME -pPASSWORD DATABASE_NAME db_data/FILE_NAME.sql
 ```
