@@ -21,6 +21,7 @@ services:
     env_file: .env
     volumes:
       - ./:/var/www/html
+      - ./wp-install.sh:/tmp/wp-install.sh
 
 volumes:
     db_data:

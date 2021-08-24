@@ -15,6 +15,9 @@
 /*
 !.gitignore
 !wp-content/
+!Dockerfile
+!docker-compose.yml
+!wp-install.sh
 !src/
 
 # Ignore everything in the "wp-content" directory, except the "plugins"
