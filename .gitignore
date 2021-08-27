@@ -18,6 +18,8 @@
 !Dockerfile
 !docker-compose.yml
 !wp-install.sh
+!gulpfile.js
+!webpack.config.js
 !src/
 
 # Ignore everything in the "wp-content" directory, except the "plugins"

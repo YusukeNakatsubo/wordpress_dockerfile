@@ -1,10 +1,10 @@
 <?php
 get_header();
 ?>
-<!-- <?php
+<?php
   $STR = 'Hello, Docker';
   var_dump($STR);
-?> -->
+?>
 <p>Hello, Docker</p>
 <?php
 get_footer();

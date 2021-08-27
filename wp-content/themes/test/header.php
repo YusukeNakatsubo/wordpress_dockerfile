@@ -7,7 +7,7 @@
  * @return $REQUEST_PATH_MATCHES   | array
  * @return $REQUEST_PATH_MATCHESIn | array
  */
-$ROOT_URI               = 'http://localhost:8000/wp-content/themes/test/';
+$ROOT_URI               = 'http://localhost:8000/wp-content/themes/test';
 $REQUEST_PATH           = $ROOT_URI.$_SERVER["REQUEST_URI"];
 $REQUEST_PATH_MATCHES   = Array();
 $REQUEST_PATH_MATCHES_IN = Array();
@@ -22,5 +22,6 @@ var_dump($REQUEST_PATH);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
 	<link rel="stylesheet" href="<?php echo $REQUEST_PATH ?>assets/css/style.css">
+	<script type="text/javascript" src="<?php echo $REQUEST_PATH ?>assets/js/bundle.js"></script>
 </head>
 <body>
