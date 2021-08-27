@@ -109,9 +109,12 @@ const GULP_SASS         = require('gulp-sass')(require('sass'))
 const GULP_SOURCEMAPS   = require('gulp-sourcemaps')
 const GULP_SASS_GLOB    = require('gulp-sass-glob')
 const GULP_AUTOPREFIXER = require('gulp-autoprefixer')
-const GULP_BABEL        = require('gulp-babel')
-const GULP_UGLIFY       = require('gulp-uglify-es').default
-const GULP_SLIM         = require('gulp-slim')
+const WEBPACK             = require('webpack')
+const GULP_WEBPACK_STREAM = require('webpack-stream')
+const WEB_PACK_CONFIG     = require('./webpack.config');
+// const GULP_BABEL        = require('gulp-babel')
+// const GULP_UGLIFY       = require('gulp-uglify-es').default
+// const GULP_SLIM         = require('gulp-slim')
 const GULP_IMAGE        = require('gulp-image')
 const GULP_CHANGED      = require('gulp-changed')
 const GULP_HTMLLINT     = require('gulp-htmllint')
@@ -124,6 +127,7 @@ const GULP_ESLINT       = require('gulp-eslint')
 * Theme Setting
 */
 const THEME_PATH = 'wp-content/themes/test/'
+
 
 /*
  * Path Settings
@@ -140,13 +144,17 @@ const GULP_PATHS = {
   OUT_JS: THEME_PATH + 'assets/js',
   OUT_IMG: THEME_PATH + 'assets/img'
 };
-console.log(GULP_PATHS.OUT_CSS)
+
 
 /*
  * Browser-sync Task
  */
 const browserSyncAbility = () =>
   GULP_BROWSER_SYNC.init({
+    // server: {baseDir:GULP_PATHS.ROOT_DIR},
+    // port: 8080,
+    // reloadOnRestart: true
+    files: ['./**/*.php'],
     // Set WordPress Local Port Number
     proxy: 'localhost:8000'
   });
@@ -190,15 +198,25 @@ const compileSass = () =>
 /*
 * Javascript Task
 */
-const compileJs = () =>
-  src(GULP_PATHS.SRC_JS)
-  .pipe(GULP_SOURCEMAPS.init())
-  .pipe(GULP_PLUMBER({errorHandler:GULP_NOTIFY.onError('<%= error.message %>')}))
-  .pipe(GULP_BABEL())
-  .pipe(GULP_UGLIFY({compress:true}))
-  .pipe(GULP_SOURCEMAPS.write('maps'))
-  .pipe(dest(GULP_PATHS.OUT_JS))
-  .pipe(GULP_BROWSER_SYNC.stream())
+// const compileJs = () =>
+//   src(GULP_PATHS.SRC_JS)
+//   .pipe(GULP_SOURCEMAPS.init())
+//   .pipe(GULP_PLUMBER({errorHandler:GULP_NOTIFY.onError('<%= error.message %>')}))
+//   .pipe(GULP_BABEL())
+//   .pipe(GULP_UGLIFY({compress:true}))
+//   .pipe(GULP_SOURCEMAPS.write('maps'))
+//   .pipe(dest(GULP_PATHS.OUT_JS))
+//   .pipe(GULP_BROWSER_SYNC.stream())
+// -> Migrate to webpack
+
+// 'return' is always required. Why?
+const bundleJs = () => {
+  return GULP_WEBPACK_STREAM(WEB_PACK_CONFIG, WEBPACK)
+    .pipe(GULP_SOURCEMAPS.init())
+    .pipe(GULP_SOURCEMAPS.write('maps'))
+    .pipe(dest(GULP_PATHS.OUT_JS))
+    .pipe(GULP_BROWSER_SYNC.stream())
+}
 
 
 /*
@@ -225,7 +243,7 @@ const compressImg = () =>
 * Watch Files
 */
 const watchSassFiles = () => watch(GULP_PATHS.SRC_SASS, compileSass)
-const watchJsFiles = () => watch(GULP_PATHS.SRC_JS, compileJs)
+const watchJsFiles = () => watch(GULP_PATHS.SRC_JS, bundleJs)
 // const watchSlimFiles = () => watch(GULP_PATHS.SRC_SLIM, compileSlim)
 const watchImgFiles = () => watch(GULP_PATHS.SRC_IMG, compressImg)
 
@@ -243,7 +261,8 @@ const defaultTask = () =>
   watchBrowserSync()
   watchStaticContents()
   compileSass()
-  compileJs()
+  bundleJs()
+  // compileJs()
   // compileSlim()
   compressImg()
 
